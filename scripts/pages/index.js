@@ -1,6 +1,6 @@
 async function getPhotographers() {
 
-    const fetchPromise = await fetch("../../../data/photographers.json");
+    const fetchPromise = await fetch("https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Front-End-Fisheye/main/data/photographers.json");
     const photographersGet = await fetchPromise.json();
     const photographers = photographersGet['photographers'];
 
