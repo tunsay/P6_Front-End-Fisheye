@@ -1,8 +1,8 @@
 function photographerFactory(data) {
-    const { name, portrait, city, country, tagline, price } = data;
+    const { name, id, portrait, city, country, tagline, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
-    const link = 'photographer.html';
+    const link = `photographer.html?id=${id}`;
 
     function getUserCardDOM() {
         // create <article></article>
@@ -20,8 +20,8 @@ function photographerFactory(data) {
         const cityCountryGet = document.createElement('div');
         cityCountryGet.classList.add('city-and-country');
 
-        const taglineGet = document.createElement('div');
-        taglineGet.classList.add('tagline');
+        const taglineDOM = document.createElement('div');
+        taglineDOM.classList.add('tagline');
         
         const priceGet = document.createElement('div');
         priceGet.classList.add('price');
@@ -29,7 +29,7 @@ function photographerFactory(data) {
         //display information in HTML
         namesGet.textContent = name;
         cityCountryGet.textContent = city + ", " + country;
-        taglineGet.textContent = tagline;
+        taglineDOM.textContent = tagline;
         priceGet.textContent = price + "€/jour";
 
         //set Element with appendChild
@@ -37,7 +37,7 @@ function photographerFactory(data) {
         a.appendChild(img);
         article.appendChild(namesGet);
         article.appendChild(cityCountryGet);
-        article.appendChild(taglineGet);
+        article.appendChild(taglineDOM);
         article.appendChild(priceGet);
         return (article);
     }
