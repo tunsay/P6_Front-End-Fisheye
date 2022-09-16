@@ -10,11 +10,11 @@ async function getPhotographers() {
 }
 
 //display datas of photographers
-async function displayData(photographers) {
+async function displayPhotographers(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     //create and display each article since factory
     photographers.forEach((photographer) => {
-        const photographerModel = photographerFactory(photographer);
+        const photographerModel = photographerFactory(photographer, 'index');
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     });
@@ -23,8 +23,9 @@ async function displayData(photographers) {
 async function init() {
     // get datas of photographers
     const { photographers } = await getPhotographers();
-    //display datats of photographers
-    displayData(photographers);
+    console.log(photographers);
+    //display datas of photographers
+    displayPhotographers(photographers);
 };
 //init ellen page
 init();

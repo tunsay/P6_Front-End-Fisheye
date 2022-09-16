@@ -58,14 +58,3 @@ h1 {
 .price{
     color: #757575;
 }
-
-#contact_modal {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  background-color: rgba(128, 128, 128, 0.469);
-}

@@ -1,45 +1,52 @@
-function photographerFactory(data) {
+function photographerFactory(data, type) {
     const { name, id, portrait, city, country, tagline, price } = data;
 
+    //Get the profil picture
     const picture = `assets/photographers/${portrait}`;
+    //Get link of the photographer select
     const link = `photographer.html?id=${id}`;
 
     function getUserCardDOM() {
-        // create <article></article>
-        const article = document.createElement( 'article' );
-        
-        //create <a></a>
-        const a = document.createElement('a');
+
+        //Create element
+        const article = document.createElement('article'); // create <article></article>
+        const a = document.createElement('a'); //create <a></a>
+        const h2 = document.createElement('h2');
+        const img = document.createElement('img');
+        const namesDOM = document.createElement('h2');
+        const cityCountryDOM = document.createElement('div');
+        const taglineDOM = document.createElement('div');
+        const priceDOM = document.createElement('div');
+
+        //Add Classes in the element selectionate
+        cityCountryDOM.classList.add('city-and-country');
+        taglineDOM.classList.add('tagline');
+        priceDOM.classList.add('price');
+        img.classList.add('photographer-picture');
+
+        // Add attributs, class and container of each element
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", `portrait de ${name}`)
         a.setAttribute("href", link);
 
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture);
-
-        const namesGet = document.createElement( 'h2' );
-
-        const cityCountryGet = document.createElement('div');
-        cityCountryGet.classList.add('city-and-country');
-
-        const taglineDOM = document.createElement('div');
-        taglineDOM.classList.add('tagline');
-        
-        const priceGet = document.createElement('div');
-        priceGet.classList.add('price');
-
         //display information in HTML
-        namesGet.textContent = name;
-        cityCountryGet.textContent = city + ", " + country;
+        namesDOM.textContent = name;
+        cityCountryDOM.textContent = city + ", " + country;
         taglineDOM.textContent = tagline;
-        priceGet.textContent = price + "€/jour";
+        priceDOM.textContent = price + "€/jour";
 
-        //set Element with appendChild
-        article.appendChild(a);
-        a.appendChild(img);
-        article.appendChild(namesGet);
-        article.appendChild(cityCountryGet);
-        article.appendChild(taglineDOM);
-        article.appendChild(priceGet);
-        return (article);
+
+        if (type === 'index') { // utilisé pour la page d'index
+            article.append(a, namesDOM, cityCountryDOM, taglineDOM, priceDOM);
+            a.appendChild(img);
+            return (article)
+        } else if (type === 'header') {
+            article.append(img, namesDOM, cityCountryDOM, taglineDOM);
+            return (article)
+        } else if (type === 'modal') {
+            h2.appendChild(namesDOM);
+            return (h2);
+        }
     }
-    return { name, picture, getUserCardDOM }
+    return { name, portrait, city, country, tagline, price, id, getUserCardDOM }
 }
