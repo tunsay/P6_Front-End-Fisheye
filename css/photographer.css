@@ -1,11 +1,11 @@
-:root{
+:root {
     --color-primary: #901C1C;
     --color-secondary: #D3573C;
     --color-tertiary: #DB8876;
     --color-shadow: rgba(0, 0, 0, 0.25);
 }
 
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     list-style: none;
@@ -15,27 +15,30 @@
 #contact_modal {
     position: fixed;
     width: 100%;
+    height: 100%;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    padding: 20px 200px;
-    background-color: rgba(0, 0, 0, 0.419);
+    padding: 20px 500px;
+    background-color: var(--color-shadow);
     opacity: 0;
     visibility: collapse;
     transition: all .5s ease;
 }
 
-#contact_modal.modal-open{
+#contact_modal.modal-open {
     opacity: 1;
     visibility: visible;
     transition: all .5s ease;
 }
 
-.fade-out{
+.fade-out {
     opacity: .5;
     transition: all .5s ease;
 }
-.contact_button, .btn {
+
+.contact_button,
+.btn {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -50,9 +53,15 @@
     transition: all .5s ease;
     box-shadow: 0 4px 12px var(--color-shadow);
 }
-.contact_button:hover{
+
+.contact_button:hover {
     background-color: var(--color-tertiary);
     color: #000;
+}
+
+.photographer-header .contact_button{
+    position: absolute;
+    left: 50%;
 }
 
 .modal {
@@ -61,8 +70,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     padding: 15px 35px 35px 35px;
     margin: auto;
 }
@@ -79,8 +86,9 @@
     cursor: pointer;
 }
 
-.modal header h2 {
-    font-size: 64px;
+.modal header h2,
+.photographerName h2 {
+    font-size: 50px;
     font-weight: normal;
     text-align: left;
     margin: 0;
@@ -107,7 +115,8 @@ form div {
     margin-bottom: 15px;
 }
 
-form input, textarea {
+form input,
+textarea {
     width: 100%;
     height: 40px;
     border: none;
@@ -119,7 +128,7 @@ form textarea {
     height: 68px;
 }
 
-form .contact_button:hover{
+form .contact_button:hover {
     background-color: #fff;
     color: var(--color-primary);
 }
@@ -132,21 +141,35 @@ form .contact_button:hover{
 .photographer-header {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    padding: 0 50px;
+}
+
+.photographer-header article {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    line-height: 45px;
 }
 
 .photographer-header article img {
     height: 200px;
     width: 200px;
-    border-radius: 100% ;
+    border-radius: 100%;
     object-fit: cover;
 }
 
 .photographer-header article h2 {
     color: var(--color-secondary);
     font-size: 36px;
+}
+
+.photographer-info {
+    display: flex;
+    flex-direction: column;
 }
