@@ -9,7 +9,7 @@ async function getPhotographer(id) {
 }
 
 async function displayPhotographer(photographer) {
-    const photographerHeader = document.querySelector(".photograph-header");
+    const photographerHeader = document.querySelector(".photographer-header");
     // const photographerModal = document.querySelector(".modal");
     const photographerModel = photographerFactory(photographer, 'header');
     console.log(photographerModel);
