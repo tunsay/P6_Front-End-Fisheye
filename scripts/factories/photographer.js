@@ -11,8 +11,7 @@ function photographerFactory(data, type) {
         //Create element
         const article = document.createElement('article'); // create <article></article>
         const a = document.createElement('a'); //create <a></a>
-        const h2 = document.createElement('h2');
-        const img = document.createElement('img');
+        const photographerPicture = document.createElement('img'); 
         const namesDOM = document.createElement('h2');
         const cityCountryDOM = document.createElement('div');
         const taglineDOM = document.createElement('div');
@@ -24,12 +23,12 @@ function photographerFactory(data, type) {
         cityCountryDOM.classList.add('city-and-country');
         taglineDOM.classList.add('tagline');
         priceDOM.classList.add('price');
-        img.classList.add('photographer-picture');
+        photographerPicture.classList.add('photographer-picture');
         photographerInfo.classList.add('photographer-info');
 
         // Add attributs, class and container of each element
-        img.setAttribute("src", picture);
-        img.setAttribute("alt", `portrait de ${name}`)
+        photographerPicture.setAttribute("src", picture);
+        photographerPicture.setAttribute("alt", `portrait de ${name}`)
         a.setAttribute("href", link);
 
         //display information in HTML
@@ -41,15 +40,16 @@ function photographerFactory(data, type) {
 
         if (type === 'index') { // utilisé pour la page d'index
             article.append(a, namesDOM, cityCountryDOM, taglineDOM, priceDOM);
-            a.appendChild(img);
+            a.appendChild(photographerPicture);
             return (article)
         } else if (type === 'header') {
-            article.append(photographerInfo, img)
+            article.append(photographerInfo, photographerPicture)
             photographerInfo.append(namesDOM, cityCountryDOM, taglineDOM);
             return (article)
         } else if (type === 'modal') {
-            // h2.append(namesDOM);
             return (namesDOM);
+        } else if (type === 'info-bar') {
+            return (priceDOM)
         }
     }
     return { name, portrait, city, country, tagline, price, id, getUserCardDOM }

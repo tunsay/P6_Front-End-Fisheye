@@ -1,37 +1,46 @@
+//Get the photograph with id as parameters (which able to find the photograpeer thanks to the function find())
 async function getPhotographer(id) {
 
     const fetchPromise = await fetch("../../data/photographers.json");
     const photographersJSON = await fetchPromise.json();
     const photographers = photographersJSON['photographers'];
-    // console.log(photographers.find(photographer => photographer.id == id))
     return photographers.find(photographer => photographer.id == id)
-
 }
 
+//This function will display the photographer info in the header AND display the name in the contact modal
 async function displayPhotographer(photographer) {
     const photographerHeader = document.querySelector(".photographer-header");
-    // const photographerModal = document.querySelector(".modal");
-    const photographerModel = photographerFactory(photographer, 'header');
-    console.log(photographerModel);
-    const userCardDOM = photographerModel.getUserCardDOM();
+    const contactModal = document.querySelector(".photographerName");
+    const photographerModelHeader = photographerFactory(photographer, 'header');
+    const photographerModelModal = photographerFactory(photographer, 'modal');
+    const userCardDOM = photographerModelHeader.getUserCardDOM();
     photographerHeader.appendChild(userCardDOM);
+    const userCardDOM2 = photographerModelModal.getUserCardDOM();
+    contactModal.appendChild(userCardDOM2);
 }
 
-async function displayNamePhotographerInModal(photographer){
-    const contactModal = document.querySelector(".photographerName");
-    const photographerModel = photographerFactory(photographer, 'modal');
+// async function displayNamePhotographerInContactModal(photographer){
+//     const contactModal = document.querySelector(".photographerName");
+//     const photographerModel = photographerFactory(photographer, 'modal');
+//     const userCardDOM = photographerModel.getUserCardDOM();
+//     contactModal.appendChild(userCardDOM);
+// }
+
+async function displayPricePhotographer(photographer){
+    const infoBar = document.querySelector (".photographer-like-prices-bar");
+    const photographerModel = photographerFactory(photographer, 'info-bar');
     const userCardDOM = photographerModel.getUserCardDOM();
-    contactModal.appendChild(userCardDOM);
+    infoBar.appendChild(userCardDOM);
 }
 
 async function init() {
-    //Display params in the Url
+    //get the search params from the url
     var searchParams = new URLSearchParams(window.location.search);
-    //Get the Params ("id")
+    //Get the photographer by having previously passed the Id of the Url Parameters
     const photographer = await getPhotographer(searchParams.get("id"));
-    console.log(photographer);
     displayPhotographer(photographer);
-    displayNamePhotographerInModal(photographer);
+    displayPricePhotographer(photographer);
+    // displayNamePhotographerInContactModal(photographer);
 }
 
 init()
