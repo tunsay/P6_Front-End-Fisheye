@@ -17,12 +17,15 @@ function photographerFactory(data, type) {
         const cityCountryDOM = document.createElement('div');
         const taglineDOM = document.createElement('div');
         const priceDOM = document.createElement('div');
+        const photographerInfo = document.createElement('div');
+        
 
         //Add Classes in the element selectionate
         cityCountryDOM.classList.add('city-and-country');
         taglineDOM.classList.add('tagline');
         priceDOM.classList.add('price');
         img.classList.add('photographer-picture');
+        photographerInfo.classList.add('photographer-info');
 
         // Add attributs, class and container of each element
         img.setAttribute("src", picture);
@@ -41,11 +44,12 @@ function photographerFactory(data, type) {
             a.appendChild(img);
             return (article)
         } else if (type === 'header') {
-            article.append(img, namesDOM, cityCountryDOM, taglineDOM);
+            article.append(photographerInfo, img)
+            photographerInfo.append(namesDOM, cityCountryDOM, taglineDOM);
             return (article)
         } else if (type === 'modal') {
-            h2.appendChild(namesDOM);
-            return (h2);
+            // h2.append(namesDOM);
+            return (namesDOM);
         }
     }
     return { name, portrait, city, country, tagline, price, id, getUserCardDOM }
