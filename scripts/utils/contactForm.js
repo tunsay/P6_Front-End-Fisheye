@@ -11,9 +11,6 @@ function displayModal() {
     modal.setAttribute("aria-hidden", "false");
     main.classList.add('fade-out'); // réduit l'opacité du main dans le background
     header.classList.add('fade-out'); // réduit l'opacité du header dans le background
-    //prevent background scrolling
-    // main.style.overflow = "hidden";
-    // main.style.position = "fixed";
     //prevent focus on backgroud elements on tab press
     contactButton.setAttribute("tabindex", "-1");
 }
@@ -23,9 +20,6 @@ function closeModal() {
     modal.setAttribute("aria-hidden", "true");
     main.classList.remove('fade-out');
     header.classList.remove('fade-out');
-    //re-enable page scrolling
-    // main.style.overflow = "auto";
-    // main.style.position = "initial";
     //makes elements focusable again
     contactButton.tabIndex = 0;
 }

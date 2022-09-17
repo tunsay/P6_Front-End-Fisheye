@@ -24,7 +24,6 @@
     background-color: var(--color-shadow);
     opacity: 0;
     visibility: collapse;
-    transition: all .5s ease;
 }
 
 #contact_modal.modal-open {
@@ -63,6 +62,7 @@
 .photographer-header .contact_button{
     position: absolute;
     left: 50%;
+    transform: translate(-50%, 0);
 }
 
 .modal {
@@ -171,6 +171,58 @@ form .contact_button:hover {
     display: flex;
     flex-direction: column;
 }
+
+/* ------------------------------ GALLERY SECTION ------------------------------ */
+
+.sort{
+    display: flex;
+    margin: 10px 100px;
+}
+
+.sort p {
+    font-weight: 700;
+}
+
+.media-gallery{
+    display: grid;
+    grid-template-columns: 0fr 1fr 0fr;
+    gap: 50px;
+    margin: 50px 100px;
+}
+
+.media-gallery article {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.media-gallery img {
+    height: 350px;
+    width: 350px;
+    border-radius: var(--border-radius) ;
+    object-fit: cover;
+    transition: all 0.2s ease-out;
+}
+
+.media-gallery .info-media{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.name-media, .like-media {
+    color: var(--color-primary);
+    font-size: 20px;
+}
+
+.like-media {
+    font-weight: 700;
+}
+
 
 /* ------------------------------ LIKE AND PRICE INFO IN THE RIGHT DOWN ------------------------------ */
 

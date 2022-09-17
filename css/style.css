@@ -62,7 +62,17 @@ h1 {
     width: 200px;
     border-radius: 100% ;
     object-fit: cover;
+    transition: all 0.2s ease-out;
 }
+
+.photographer_section:hover > * img{
+    opacity: .5;
+}
+.photographer_section:hover > *:hover img{
+    transform: scale(1.1);
+    opacity: 1;
+}
+
 .city-and-country{
     color: var(--color-primary);
     font-size: 20px;
