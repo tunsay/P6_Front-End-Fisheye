@@ -5,6 +5,7 @@ const modal = document.getElementById("contact_modal");
 const form = document.querySelector('form');
 // background elements
 const contactButton = document.querySelector('.contact_button');
+const logo = document.querySelector('.a-logo');
 
 function displayModal() {
     modal.classList.add('modal-open'); // rend la modale visible
@@ -13,6 +14,7 @@ function displayModal() {
     header.classList.add('fade-out'); // réduit l'opacité du header dans le background
     //prevent focus on backgroud elements on tab press
     contactButton.setAttribute("tabindex", "-1");
+    logo.setAttribute("tabindex", "-1");
 }
 
 function closeModal() {
@@ -22,6 +24,7 @@ function closeModal() {
     header.classList.remove('fade-out');
     //makes elements focusable again
     contactButton.tabIndex = 0;
+    logo.tabIndex = 0
 }
 
 // fermeture de la modale au clavier avec échap

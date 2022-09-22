@@ -198,7 +198,7 @@ form .contact_button:hover {
     flex-direction: column;
 }
 
-.media-gallery img {
+.media-gallery img, video {
     height: 350px;
     width: 350px;
     border-radius: var(--border-radius) ;
@@ -221,6 +221,10 @@ form .contact_button:hover {
 
 .like-media {
     font-weight: 700;
+}
+
+.link-media{
+    cursor: pointer;
 }
 
 
