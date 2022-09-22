@@ -13,6 +13,7 @@ async function getPhotographers() {
 async function displayPhotographers(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     //create and display each article since factory
+    console.log(photographers);
     photographers.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer, 'index');
         const userCardDOM = photographerModel.getUserCardDOM();
