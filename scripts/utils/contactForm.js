@@ -15,6 +15,12 @@ function displayModal() {
     //prevent focus on backgroud elements on tab press
     contactButton.setAttribute("tabindex", "-1");
     logo.setAttribute("tabindex", "-1");
+    
+    let galleryLinks = document.querySelectorAll('.link-media');
+
+    galleryLinks.forEach(element => {
+        element.tabIndex = -1;
+    })
 }
 
 function closeModal() {
@@ -25,6 +31,12 @@ function closeModal() {
     //makes elements focusable again
     contactButton.tabIndex = 0;
     logo.tabIndex = 0
+
+    let galleryLinks = document.querySelectorAll('.link-media');
+
+    galleryLinks.forEach(element => {
+        element.tabIndex = 0;
+    })
 }
 
 // fermeture de la modale au clavier avec échap

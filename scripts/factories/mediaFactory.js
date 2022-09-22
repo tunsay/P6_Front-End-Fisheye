@@ -26,8 +26,8 @@ function mediaFactory(data) {
         infoMedia.classList.add('info-media');
         titleMediaDOM.classList.add('name-media');
         likeMediaDOM.classList.add('like-media');
-        mediaVideo.classList.add('video-media');
-        linkMedia.classList.add('link-media');
+        mediaVideo.classList.add('video-media'); //<video></video>
+        linkMedia.classList.add('link-media'); //<a></a>
 
         //add attributes, class and container of each element
         mediaPicture.setAttribute("src", mediaUrl);
@@ -35,9 +35,27 @@ function mediaFactory(data) {
         mediaVideo.setAttribute("muted", "muted");
         mediaVideo.setAttribute("webkit-playsinline", "true");
         mediaVideo.setAttribute("playsinline", "true");
+        mediaVideo.setAttribute("controls", "true");
         mediaVideo.setAttribute("loop", "");
+        mediaVideo.setAttribute("tabindex", "-1");
         source.setAttribute("src", mediaUrl);
         source.setAttribute("type", "video/mp4");
+        linkMedia.setAttribute("href", mediaUrl);
+        linkMedia.setAttribute("aria-label", `open ${title} in a lightbox`);
+        linkMedia.setAttribute("tabindex", "0");
+
+        //ouvre la lightbox au clic sur lien image
+        linkMedia.addEventListener('click', (event) => {
+            event.preventDefault(); // empêche le lien d'ouvrir l'image par défaut
+            openLightbox(id); //(ex. id=365615) affiche l'image correspondant à l'id dans la lightbox
+        })
+        //ouvre la lightbox au clavier avec entrée sur le lien image
+        linkMedia.addEventListener('keypress', (event) => {
+            event.preventDefault();
+            if (event.key === "Enter") {
+                openLightbox(id);
+            }
+        })
 
         //display information in Html
         titleMediaDOM.textContent = title;
