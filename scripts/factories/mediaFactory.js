@@ -59,7 +59,7 @@ function mediaFactory(data) {
 
         //display information in Html
         titleMediaDOM.textContent = title;
-        likeMediaDOM.textContent = likes + " ♥";
+        likeMediaDOM.textContent = likes;
 
 
         if (data.image) {

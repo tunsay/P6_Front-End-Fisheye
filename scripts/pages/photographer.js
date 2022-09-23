@@ -85,67 +85,6 @@ async function displayTotalLikesByPhotographer(id) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-function createLightbox(medias, id) {
-    //récupère et store l'index de chaque media selon son id
-    let photoID = medias.findIndex(media => media.id === id);
-
-    function displayLightbox() {
-        //lightbox structure elements
-        const lightboxModal = document.getElementById('lightbox_modal');
-        const lightboxFigure = document.querySelector('.lightbox-item');
-        const btnPrev = document.querySelector('.btn-prev');
-        const btnNext = document.querySelector('.btn-next');
-        //lightbox structure elements to create
-        const mediaTitle = document.createElement('div');
-        const lightboxVideo = document.createElement("video");
-        const lightboxImage = document.createElement('img');
-        //Add class
-        mediaTitle.className = "lightbox-media-title";
-        lightboxVideo.className = "lightbox-video";
-        lightboxImage.className = "lightbox-img";
-        //lightbox buttons
-        //removes display none
-        lightboxModal.classList.remove('hidden');
-
-        contactButton.setAttribute("tabindex", "-1");
-        logo.setAttribute("tabindex", "-1");
-
-        let galleryLinks = document.querySelectorAll('.link-media');
-
-        galleryLinks.forEach(element => {
-            element.tabIndex = -1;
-        })
-
-        //gestion de l'affichage des médias selon leur type
-        if (medias[photoID].image) {
-            lightboxImage.setAttribute("alt", `${medias[photoID].title}, closeup view`);
-            lightboxImage.setAttribute("src", `../assets/medias/${medias[photoID].image}`);
-            mediaTitle.textContent = `${medias[photoID].title}`;
-
-            lightboxFigure.append(lightboxImage, mediaTitle);
-        } else if (medias[photoID].video) {
-            lightboxVideo.setAttribute("alt", `${medias[photoID].title}, closeup view`);
-            lightboxVideo.setAttribute("src", `../assets/medias/${medias[photoID].video}`);
-            lightboxVideo.setAttribute("controls", true);
-            mediaTitle.textContent = `${medias[photoID].title}`;
-
-            lightboxFigure.append(lightboxVideo, mediaTitle);
-        }
-    }
-    return { displayLightbox };
-}
-
-
 //LIGHTBOX OPEN & CLOSE FUNCTIONS
 function openLightbox(id) { //appelée dans mediaFactory.js
     const lightboxModal = document.getElementById('lightbox_modal');
@@ -168,33 +107,7 @@ function closeLightbox() { //appelée dans le html onclick & dans lightboxFactor
     galleryLinks.forEach(element => {
         element.tabIndex = 0;
     })
-
-    //events pour la navigation au clavier dans la lightbox
-    document.addEventListener('keyup', (event) => {
-        //vérifie que la lightbox est ouverte
-        if (lightboxModal.ariaHidden === "false") {
-            switch (event.key) {
-                case 'Escape':
-                    closeLightbox(); //fonction définie dans photographer.js
-                    break;
-            }
-            event.preventDefault();
-        }
-    });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

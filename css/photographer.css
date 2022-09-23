@@ -16,6 +16,13 @@
     display: none;
 }
 
+.lightbox-item-title{
+    color: var(--color-primary);
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 15px;
+}
+
 /* ------------------------------ CONTACT FORM ------------------------------ */
 #contact_modal {
     position: fixed;
