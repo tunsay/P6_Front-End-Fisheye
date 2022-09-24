@@ -1,8 +1,6 @@
-// créé un array pour stocker les médias
-let mediaFilter = [];
 //Get the photograph with id as parameters (which able to find the photograpeer thanks to the function find())
 async function getPhotographer(id) {
-
+    
     const fetchPromise = await fetch("../../data/photographers.json");
     const photographersJSON = await fetchPromise.json();
     const photographers = photographersJSON['photographers'];
@@ -11,6 +9,8 @@ async function getPhotographer(id) {
 
 //Get all medias with id of the photographer as parameters
 async function getMedia(idPhotographer) {
+    // créé un array pour stocker les médias
+    mediaFilter = [];
     const fetchPromise = await fetch("../../data/photographers.json");
     const mediasJSON = await fetchPromise.json();
     mediaFilter = mediasJSON.media.filter((e) => e.photographerId == idPhotographer);
@@ -36,7 +36,19 @@ async function displayPriceAndLikePhotographer(photographer, totalLike) {
     const infoLeft = document.querySelector(".infos-left");
     const photographerModel = photographerFactory(photographer, 'info-bar');
     const userCardDOM = photographerModel.getUserCardDOM();
-    infoLeft.append(totalLike + " ♥");
+    
+    const span = document.createElement('span');
+    const totalLikeSpan = document.createElement('span');
+    const iconHeart = document.createElement('i');
+    
+    iconHeart.classList.add('fa-solid','fa-heart');
+    totalLikeSpan.classList.add('total-likes');
+
+    totalLikeSpan.textContent = totalLike + " ";
+    
+    span.appendChild(iconHeart);
+    infoLeft.appendChild(totalLikeSpan);
+    infoLeft.appendChild(span);
     infoBar.appendChild(userCardDOM);
 }
 
@@ -48,24 +60,22 @@ async function displayMedia(medias) {
         const mediaCardDOM = mediaModel.getMediaCardDOM();
         mediaGallery.appendChild(mediaCardDOM);
     });
-
     playVideoHover();
-
 }
 
 //Play video when the mouse hover the media
 function playVideoHover() {
     const videos = document.querySelectorAll('.video-media');
-
+    
     videos.forEach(video => {
         video.addEventListener('mouseover', () => {
             video.play();
         });
-
+        
         video.addEventListener('mouseout', () => {
             video.pause();
         });
-
+        
     });
 }
 
@@ -74,13 +84,10 @@ async function displayTotalLikesByPhotographer(id) {
     const mediasJSON = await fetchPromise.json();
     const medias = mediasJSON.media.filter((e) => e.photographerId == id);
     let totalLikes = 0;
-    console.log(medias[0].likes);
-    console.log(medias.length);
     for (let i = 0; i < medias.length; i++) {
         const media = medias[i];
         totalLikes = totalLikes + media.likes
     }
-    console.log("like définitive : " + totalLikes)
     return totalLikes;
 }
 
@@ -98,12 +105,12 @@ function closeLightbox() { //appelée dans le html onclick & dans lightboxFactor
     lightboxModal.setAttribute("aria-hidden", 'true');
     const lightbox = document.querySelector('.lightbox-item');
     lightbox.innerHTML = "";
-
+    
     contactButton.tabIndex = 0;
     logo.tabIndex = 0
-
+    
     let galleryLinks = document.querySelectorAll('.link-media');
-
+    
     galleryLinks.forEach(element => {
         element.tabIndex = 0;
     })
@@ -118,7 +125,6 @@ async function init() {
     //Get the photographer by having previously passed the Id of the Url Parameters
     const photographer = await getPhotographer(photographerId);
     const media = await getMedia(photographerId);
-    console.log(media);
     displayPhotographer(photographer);
     const totalLike = await displayTotalLikesByPhotographer(photographerId);
     displayPriceAndLikePhotographer(photographer, totalLike);

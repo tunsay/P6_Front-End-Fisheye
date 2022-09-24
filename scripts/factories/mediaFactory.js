@@ -14,9 +14,11 @@ function mediaFactory(data) {
 
         //Create element
         const article = document.createElement('article');
+        const span = document.createElement('span');
         const linkMedia = document.createElement('a');
         const mediaPicture = document.createElement('img');
         const mediaVideo = document.createElement('video');
+        const iconHeart = document.createElement('i');
         const source = document.createElement('source');
         const infoMedia = document.createElement('div');
         const titleMediaDOM = document.createElement('span');
@@ -26,6 +28,7 @@ function mediaFactory(data) {
         infoMedia.classList.add('info-media');
         titleMediaDOM.classList.add('name-media');
         likeMediaDOM.classList.add('like-media');
+        iconHeart.classList.add('fa-solid', 'fa-heart'); //<i></i>
         mediaVideo.classList.add('video-media'); //<video></video>
         linkMedia.classList.add('link-media'); //<a></a>
 
@@ -57,20 +60,42 @@ function mediaFactory(data) {
             }
         })
 
+        let likeCount = likes;
+        let mediaIsLiked = false;
+
+        iconHeart.addEventListener('click', () => {
+            if (mediaIsLiked == false) {
+                likeMediaDOM.textContent = likeCount + 1 + " ";
+                iconHeart.classList.add('liked');
+                let totalLikes = document.querySelector('.total-likes');
+                totalLikes.textContent = parseInt(totalLikes.textContent) + 1 + " ";
+                likeMediaDOM.append(iconHeart);
+            } else {
+                likeMediaDOM.textContent = likeCount + " ";
+                iconHeart.classList.remove('liked');
+                let totalLikes = document.querySelector('.total-likes');
+                totalLikes.textContent = parseInt(totalLikes.textContent) - 1 + " ";
+                likeMediaDOM.append(iconHeart);
+            }
+            mediaIsLiked = !mediaIsLiked; //passe à true
+        });
+
         //display information in Html
         titleMediaDOM.textContent = title;
-        likeMediaDOM.textContent = likes;
+        likeMediaDOM.textContent = likes + " ";
 
 
         if (data.image) {
-            infoMedia.appendChild(titleMediaDOM);
-            infoMedia.appendChild(likeMediaDOM);
+            span.appendChild(iconHeart);
+            likeMediaDOM.appendChild(span);
+            infoMedia.append(titleMediaDOM, likeMediaDOM);
             linkMedia.appendChild(mediaPicture);
             article.append(linkMedia, infoMedia);
             return (article);
         } else if (data.video) {
-            infoMedia.appendChild(titleMediaDOM);
-            infoMedia.appendChild(likeMediaDOM);
+            span.appendChild(iconHeart);
+            likeMediaDOM.appendChild(span);
+            infoMedia.append(titleMediaDOM, likeMediaDOM);
             mediaVideo.appendChild(source);
             linkMedia.appendChild(mediaVideo)
             article.append(linkMedia, infoMedia);

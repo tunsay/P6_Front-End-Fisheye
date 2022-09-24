@@ -204,7 +204,7 @@ form .contact_button:hover {
 .media-gallery article {
     display: flex;
     justify-self: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
 }
@@ -223,6 +223,7 @@ form .contact_button:hover {
     justify-content: space-between;
     width: 100%;
     margin-top: 10px;
+    user-select: none;
 }
 
 .name-media, .like-media {
@@ -232,10 +233,25 @@ form .contact_button:hover {
 
 .like-media {
     font-weight: 700;
+    white-space: nowrap;
 }
 
-.link-media{
+.like-media .fa-heart{
+    transition: all .2s ease;
     cursor: pointer;
+}
+
+.like-media .fa-heart:hover{
+    transform: scale(1.3);
+}
+
+.liked{
+    color: red;
+    transform: scale(1.3);
+}
+
+.liked:hover{
+    transform: scale(1);
 }
 
 
@@ -254,6 +270,7 @@ form .contact_button:hover {
     font-weight: bolder;
     padding: 0 30px;
     border-radius: var(--border-radius);
+    user-select: none;
 }
 
 .photographer-like-prices-bar .price{
