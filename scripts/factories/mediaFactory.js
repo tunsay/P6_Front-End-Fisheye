@@ -1,4 +1,4 @@
-function mediaFactory(data) {
+function mediaFactory(data, type) {
     const { id, photographerId, title, likes } = data;
 
     // défini l'url à utiliser selon le type de média
@@ -81,23 +81,36 @@ function mediaFactory(data) {
         titleMediaDOM.textContent = title;
         likeMediaDOM.textContent = likes + " ";
 
-        if (data.image) {
-            span.appendChild(iconHeart);
-            likeMediaDOM.appendChild(span);
-            infoMedia.append(titleMediaDOM, likeMediaDOM);
-            linkMedia.appendChild(mediaPicture);
-            article.append(linkMedia, infoMedia);
-            return (article);
-        } else if (data.video) {
-            span.appendChild(iconHeart);
-            likeMediaDOM.appendChild(span);
-            infoMedia.append(titleMediaDOM, likeMediaDOM);
-            mediaVideo.appendChild(source);
-            linkMedia.appendChild(mediaVideo)
-            article.append(linkMedia, infoMedia);
-            return (article);
+        if (type === "Miniature") {
+            if (data.image) {
+                span.appendChild(iconHeart);
+                likeMediaDOM.appendChild(span);
+                infoMedia.append(titleMediaDOM, likeMediaDOM);
+                linkMedia.appendChild(mediaPicture);
+                article.append(linkMedia, infoMedia);
+                return (article);
+            } else if (data.video) {
+                span.appendChild(iconHeart);
+                likeMediaDOM.appendChild(span);
+                infoMedia.append(titleMediaDOM, likeMediaDOM);
+                mediaVideo.appendChild(source);
+                linkMedia.appendChild(mediaVideo)
+                article.append(linkMedia, infoMedia);
+                return (article);
+            }
         }
 
+        if (type === "Lightbox") {
+            if (data.image) {
+                article.append(mediaPicture, titleMediaDOM)
+                return (article);
+            } else if (data.video) {
+                mediaVideo.setAttribute("autoplay", "");
+                mediaVideo.appendChild(source);
+                article.append(mediaVideo, titleMediaDOM)
+                return (article);
+            }
+        }
     }
     return { id, photographerId, title, likes, getMediaCardDOM }
 }

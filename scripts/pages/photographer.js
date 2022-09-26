@@ -44,7 +44,8 @@ async function displayPhotographer(photographer) {
 async function displayMedia(medias) {
     const mediaGallery = document.querySelector(".media-gallery");
     medias.forEach(media => {
-        const mediaModel = mediaFactory(media);
+        const mediaModel = mediaFactory(media, "Miniature");
+        console.log(media);
         const mediaCardDOM = mediaModel.getMediaCardDOM();
         mediaGallery.appendChild(mediaCardDOM);
     });
@@ -128,7 +129,103 @@ function closeLightbox() { //appelée dans le html onclick & dans lightboxFactor
     })
 }
 
+function createLightbox(medias, id) {
+    //récupère et store l'index de chaque media selon son id
+    let photoID = medias.findIndex(media => media.id === id);
 
+    function displayLightbox() {
+        //lightbox structure elements
+        const lightboxModal = document.getElementById('lightbox_modal');
+        const lightboxFigure = document.querySelector('.lightbox-item');
+        //lightbox structure elements to create
+        const mediaTitle = document.createElement('span');
+        const lightboxVideo = document.createElement("video");
+        const lightboxImage = document.createElement('img');
+        //Add classes
+        mediaTitle.className = "name-media";
+        lightboxVideo.className = "video-media";
+        //lightbox buttons
+        const btnPrev = document.querySelector('.btn-prev');
+        const btnNext = document.querySelector('.btn-next');
+        //removes display none
+        lightboxModal.classList.remove('hidden');
+        //Disable the focusable of element
+        contactButton.setAttribute("tabindex", "-1");
+        logo.setAttribute("tabindex", "-1");
+
+        let galleryLinks = document.querySelectorAll('.link-media');
+        galleryLinks.forEach(element => {
+            element.tabIndex = -1;
+        })
+        //prevent scrolling of the page
+        document.body.style.overflow = "hidden";
+
+        //HERE DISPLAY PHOTO OR VIDEO WITCH HID TITLE
+        displayLightboxContainer();
+
+        //events clic arrow left and Right
+        btnNext.addEventListener('click', () => {
+            lightboxFigure.innerHTML = ""; // erase the container of lightbox before
+            //if the index is less than the total length of the array -1, go to the next index
+            if (photoID < medias.length - 1) {
+                photoID++;
+            } else { //otherwise go the last index
+                photoID = 0;
+            }
+            displayLightboxContainer()
+        })
+
+        btnPrev.addEventListener('click', () => {
+            lightboxFigure.innerHTML = ""; // erase the container of lightbox before
+            //if index is greater than 0, go to previous index
+            if (photoID > 0) {
+                photoID--;
+            } else { //otherwise go the last index
+                photoID = medias.length - 1;
+            }
+            displayLightboxContainer()
+        })
+
+        //events pour la navigation au clavier dans la lightbox
+        document.addEventListener('keyup', (event) => {
+            //vérifie que la lightbox est ouverte
+            if (lightboxModal.ariaHidden === "false") {
+                switch (event.key) {
+                    case 'ArrowLeft':
+                        lightboxFigure.innerHTML = "";
+                        if (photoID > 0) {
+                            photoID--;
+                        } else {
+                            photoID = medias.length - 1;
+                        }
+                        displayLightboxContainer()
+                        break;
+                    case 'ArrowRight':
+                        lightboxFigure.innerHTML = "";
+                        if (photoID < medias.length - 1) {
+                            photoID++;
+                        } else {
+                            photoID = 0;
+                        }
+                        displayLightboxContainer()
+                        break;
+                    case 'Escape':
+                        closeLightbox(); //function defined in photographer.js
+                        break;
+                }
+                event.preventDefault();
+            }
+        });
+        //management of media according to their type during navigation in the lightbox
+        function displayLightboxContainer() {
+            //Here put the photo or video with his title
+            const mediaModelLightbox = mediaFactory(medias[photoID], "Lightbox");
+            const mediaCardLightboxDOM = mediaModelLightbox.getMediaCardDOM();
+            lightboxFigure.appendChild(mediaCardLightboxDOM);
+        }
+    }
+    return { displayLightbox };
+}
 
 async function init() {
     //get the search params from the url

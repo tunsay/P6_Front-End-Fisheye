@@ -284,7 +284,11 @@ form .contact_button:hover {
 .lightbox-item{
     height: 100%;
 }
-.lightbox-img, .lightbox-video{
+.lightbox-item article{
+    height: 100%;
+}
+.lightbox-item img,
+.lightbox-item .video-media{
     margin: 0 15px;
     height: 100%;
     width: auto;
@@ -302,7 +306,7 @@ form .contact_button:hover {
     color: var(--color-primary);
 }
 
-.lightbox-item-title{
+.lightbox-item .name-media{
     color: var(--color-primary);
     display: flex;
     justify-content: space-between;
