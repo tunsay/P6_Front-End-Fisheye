@@ -1,7 +1,7 @@
 //Get the photograph with id as parameters (which able to find the photograpeer thanks to the function find())
 async function getPhotographer(id) {
 
-    const fetchPromise = await fetch("../../data/photographers.json");
+    const fetchPromise = await fetch("./data/photographers.json");
     const photographersJSON = await fetchPromise.json();
     const photographers = photographersJSON['photographers'];
     return photographers.find(photographer => photographer.id == id)
@@ -11,7 +11,7 @@ async function getPhotographer(id) {
 async function getMedia(idPhotographer) {
     // créé un array pour stocker les médias
     mediaFilter = [];
-    const fetchPromise = await fetch("../../data/photographers.json");
+    const fetchPromise = await fetch("./data/photographers.json");
     const mediasJSON = await fetchPromise.json();
     mediaFilter = mediasJSON.media.filter((e) => e.photographerId == idPhotographer);
     //filtre et store dans un array les média selon l'id du photographe    
@@ -68,7 +68,7 @@ function playVideoHover() {
 }
 
 async function displayTotalLikesByPhotographer(id) {
-    const fetchPromise = await fetch("../../data/photographers.json");
+    const fetchPromise = await fetch("./data/photographers.json");
     const mediasJSON = await fetchPromise.json();
     const medias = mediasJSON.media.filter((e) => e.photographerId == id);
     let totalLikes = 0;
