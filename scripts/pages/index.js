@@ -3,7 +3,7 @@ async function getPhotographers() {
     //get the datas of the json
     const response = await fetch('../../data/photographers.json');
     if (response.status = 404) {
-        const response = await fetch('P6_Front-End-Fisheye/./data/photographers.json');
+        const response = await fetch('./data/photographers.json');
     }
     
     const data = await response.json();
