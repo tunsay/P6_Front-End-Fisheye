@@ -1,5 +1,5 @@
 // éléments du formulaire
-const main = document.querySelector('main');
+const body = document.querySelector('body');
 const header = document.querySelector('header');
 const modal = document.getElementById("contact_modal");
 const form = document.querySelector('form');
@@ -15,9 +15,11 @@ function displayModal() {
     //prevent focus on backgroud elements on tab press
     contactButton.setAttribute("tabindex", "-1");
     logo.setAttribute("tabindex", "-1");
+    //Prevent scrolling
+    document.body.style.overflow = "hidden";
     
     let galleryLinks = document.querySelectorAll('.link-media');
-
+    
     galleryLinks.forEach(element => {
         element.tabIndex = -1;
     })
@@ -30,10 +32,12 @@ function closeModal() {
     header.classList.remove('fade-out');
     //makes elements focusable again
     contactButton.tabIndex = 0;
-    logo.tabIndex = 0
-
+    logo.tabIndex = 0;
+    //Make element scrollable again
+    document.body.style.overflow = "visible";
+    
     let galleryLinks = document.querySelectorAll('.link-media');
-
+    
     galleryLinks.forEach(element => {
         element.tabIndex = 0;
     })

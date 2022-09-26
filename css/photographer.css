@@ -1,28 +1,3 @@
-:root {
-    --color-primary: #901C1C;
-    --color-secondary: #D3573C;
-    --color-tertiary: #DB8876;
-    --color-shadow: rgba(0, 0, 0, 0.25);
-    --border-radius: 5px;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    list-style: none;
-}
-
-.hidden, .focused{
-    display: none;
-}
-
-.lightbox-item-title{
-    color: var(--color-primary);
-    display: flex;
-    justify-content: space-between;
-    margin: 2px 15px;
-}
-
 /* ------------------------------ CONTACT FORM ------------------------------ */
 #contact_modal {
     position: fixed;
@@ -94,7 +69,8 @@
     padding: 0;
 }
 
-.modal header img {
+/* The cross button */
+.modal header img { 
     cursor: pointer;
 }
 
@@ -214,7 +190,6 @@ form .contact_button:hover {
     width: 350px;
     border-radius: var(--border-radius) ;
     object-fit: cover;
-    transition: all 0.2s ease-out;
 }
 
 .media-gallery .info-media{
@@ -255,7 +230,7 @@ form .contact_button:hover {
 }
 
 
-/* ------------------------------ LIKE AND PRICE INFO IN THE RIGHT DOWN ------------------------------ */
+/* ------------------------------ LIKE AND PRICE INFO IN THE CORNER RIGHT DOWN ------------------------------ */
 
 .photographer-like-prices-bar{
     display: flex;
@@ -312,7 +287,8 @@ form .contact_button:hover {
 .lightbox-img, .lightbox-video{
     margin: 0 15px;
     height: 100%;
-    border-radius: var(--border-radius)
+    width: auto;
+    border-radius: var(--border-radius);
 }
 .lightbox-btn{
     font-size: 30px;
@@ -324,4 +300,11 @@ form .contact_button:hover {
     bottom: -30px;
     left: 35px;
     color: var(--color-primary);
+}
+
+.lightbox-item-title{
+    color: var(--color-primary);
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 15px;
 }

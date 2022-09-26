@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 function createLightbox(medias, id) {
     //récupère et store l'index de chaque media selon son id
     let photoID = medias.findIndex(media => media.id === id);
@@ -21,17 +19,17 @@ function createLightbox(medias, id) {
         const btnNext = document.querySelector('.btn-next');
         //removes display none
         lightboxModal.classList.remove('hidden');
-
+        //Disable the focusable of element
         contactButton.setAttribute("tabindex", "-1");
         logo.setAttribute("tabindex", "-1");
 
         let galleryLinks = document.querySelectorAll('.link-media');
-
         galleryLinks.forEach(element => {
             element.tabIndex = -1;
         })
-
-        //gestion de l'affichage des médias selon leur type
+        //prevent scrolling of the page
+        document.body.style.overflow = "hidden";
+        //management of the display of media according to their type
         if (medias[photoID].image) {
             lightboxImage.setAttribute("alt", `${medias[photoID].title}, closeup view`);
             lightboxImage.setAttribute("src", `../assets/medias/${medias[photoID].image}`);
@@ -42,32 +40,31 @@ function createLightbox(medias, id) {
         if (medias[photoID].video) {
             lightboxVideo.setAttribute("alt", `${medias[photoID].title}, closeup view`);
             lightboxVideo.setAttribute("src", `../assets/medias/${medias[photoID].video}`);
-            lightboxVideo.setAttribute("controls", true);
+            // lightboxVideo.setAttribute("controls", true);
+            lightboxVideo.setAttribute("autoplay", "");
             mediaTitle.textContent = `${medias[photoID].title}`;
 
             lightboxFigure.append(lightboxVideo, mediaTitle);
         }
 
-        //events au clic sur les flèches droites et gauche
-        btnNext.addEventListener('click', () => {
-            //si l'index est inférieur à la longueur totale du tableau -1, passe à l'index suivant
-            lightboxFigure.innerHTML = "";
+        //events clic arrow left and Right
+        btnNext.addEventListener('click', () => {             
+            lightboxFigure.innerHTML = ""; // erase the container of lightbox before
+            //if the index is less than the total length of the array -1, go to the next index
             if (photoID < medias.length - 1) {
                 photoID++;
-            //sinon retourne au début
-            } else {
+            } else { //otherwise go the last index
                 photoID = 0;
             }
             lightboxNavigation();
         })
-
+        
         btnPrev.addEventListener('click', () => {
-            //si l'index est supérieur à 0, va à l'index précédent
-            lightboxFigure.innerHTML = "";
+            lightboxFigure.innerHTML = ""; // erase the container of lightbox before
+            //if index is greater than 0, go to previous index
             if (photoID > 0) {
                 photoID--;
-            //sinon va au dernier index
-            } else {
+            } else { //otherwise go the last index
                 photoID = medias.length - 1;
             }
             lightboxNavigation();
@@ -97,13 +94,13 @@ function createLightbox(medias, id) {
                         lightboxNavigation();
                         break;
                     case 'Escape':
-                        closeLightbox(); //fonction définie dans photographer.js
+                        closeLightbox(); //function defined in photographer.js
                         break;
                 }
                 event.preventDefault();
             }
         });
-        //gestion des médias selon leur type pendant la navigation dans la lightbox
+        //management of media according to their type during navigation in the lightbox
         function lightboxNavigation() {
             mediaTitle.textContent = `${medias[photoID].title}`;
             if (medias[photoID].image) {
@@ -122,7 +119,8 @@ function createLightbox(medias, id) {
                 lightboxImage.removeAttribute("alt");
                 lightboxVideo.setAttribute("alt", `${medias[photoID].title}`);
                 lightboxVideo.src = `../assets/medias/${medias[photoID].video}`
-                lightboxVideo.setAttribute("controls", true);
+                // lightboxVideo.setAttribute("controls", true);
+                lightboxVideo.setAttribute("autoplay", "");
             }
         }
     }

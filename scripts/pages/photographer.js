@@ -1,6 +1,6 @@
 //Get the photograph with id as parameters (which able to find the photograpeer thanks to the function find())
 async function getPhotographer(id) {
-    
+
     const fetchPromise = await fetch("../../data/photographers.json");
     const photographersJSON = await fetchPromise.json();
     const photographers = photographersJSON['photographers'];
@@ -20,37 +20,25 @@ async function getMedia(idPhotographer) {
 
 //This function will display the photographer info in the header AND display the name in the contact modal
 async function displayPhotographer(photographer) {
-    const photographerHeader = document.querySelector(".photographer-header");
-    const contactModal = document.querySelector(".photographerName");
-    const photographerModelHeader = photographerFactory(photographer, 'header');
-    const photographerModelModal = photographerFactory(photographer, 'modal');
-    const userCardDOMHeader = photographerModelHeader.getUserCardDOM();
-    photographerHeader.appendChild(userCardDOMHeader);
-    const userCardDOMModal = photographerModelModal.getUserCardDOM();
-    contactModal.appendChild(userCardDOMModal);
+    try {
+        const photographerHeader = document.querySelector(".photographer-header");
+        const contactModal = document.querySelector(".photographerName");
+        const photographerModelHeader = photographerFactory(photographer, 'header');
+        const photographerModelModal = photographerFactory(photographer, 'modal');
+        const userCardDOMHeader = photographerModelHeader.getUserCardDOM();
+        photographerHeader.appendChild(userCardDOMHeader);
+        const userCardDOMModal = photographerModelModal.getUserCardDOM();
+        contactModal.appendChild(userCardDOMModal);
+    } catch (error) {
+        const contactButton = document.querySelector(".contact_button");
+        const photographerHeader = document.querySelector(".photographer-header");
+        contactButton.style.display = "none";
+        photographerHeader.style.fontSize = "50px";
+        photographerHeader.textContent = "Le contenu n'existe pas ou a été supprimé =(";
+        document.title = "FishEye"
+    }
 }
 
-//Display Likes ans Price in the bar orange down and right (photographer: pick prices of the photographers, totalLike: additionate all likes of all medias)
-async function displayPriceAndLikePhotographer(photographer, totalLike) {
-    const infoBar = document.querySelector(".photographer-like-prices-bar");
-    const infoLeft = document.querySelector(".infos-left");
-    const photographerModel = photographerFactory(photographer, 'info-bar');
-    const userCardDOM = photographerModel.getUserCardDOM();
-    
-    const span = document.createElement('span');
-    const totalLikeSpan = document.createElement('span');
-    const iconHeart = document.createElement('i');
-    
-    iconHeart.classList.add('fa-solid','fa-heart');
-    totalLikeSpan.classList.add('total-likes');
-
-    totalLikeSpan.textContent = totalLike + " ";
-    
-    span.appendChild(iconHeart);
-    infoLeft.appendChild(totalLikeSpan);
-    infoLeft.appendChild(span);
-    infoBar.appendChild(userCardDOM);
-}
 
 //display Media on the page of the photographer selectionate at previously
 async function displayMedia(medias) {
@@ -66,16 +54,16 @@ async function displayMedia(medias) {
 //Play video when the mouse hover the media
 function playVideoHover() {
     const videos = document.querySelectorAll('.video-media');
-    
+
     videos.forEach(video => {
         video.addEventListener('mouseover', () => {
             video.play();
         });
-        
+
         video.addEventListener('mouseout', () => {
             video.pause();
         });
-        
+
     });
 }
 
@@ -84,19 +72,40 @@ async function displayTotalLikesByPhotographer(id) {
     const mediasJSON = await fetchPromise.json();
     const medias = mediasJSON.media.filter((e) => e.photographerId == id);
     let totalLikes = 0;
-    for (let i = 0; i < medias.length; i++) {
-        const media = medias[i];
-        totalLikes = totalLikes + media.likes
-    }
+    medias.map(media => {
+        totalLikes += media.likes;
+    });
     return totalLikes;
 }
 
+//Display Likes ans Price in the bar orange down and right (photographer: pick prices of the photographers, totalLike: additionate all likes of all medias)
+async function displayPriceAndLikePhotographer(photographer, totalLike) {
+    const infoBar = document.querySelector(".photographer-like-prices-bar");
+    const infoLeft = document.querySelector(".infos-left");
+    const photographerModel = photographerFactory(photographer, 'info-bar');
+    const userCardDOM = photographerModel.getUserCardDOM();
+
+    const span = document.createElement('span');
+    const totalLikeSpan = document.createElement('span');
+    const iconHeart = document.createElement('i');
+
+    iconHeart.classList.add('fa-solid', 'fa-heart');
+    totalLikeSpan.classList.add('total-likes');
+
+    totalLikeSpan.textContent = totalLike + " ";
+
+    span.appendChild(iconHeart);
+    infoLeft.appendChild(totalLikeSpan);
+    infoLeft.appendChild(span);
+    infoBar.appendChild(userCardDOM);
+}
 
 //LIGHTBOX OPEN & CLOSE FUNCTIONS
 function openLightbox(id) { //appelée dans mediaFactory.js
     const lightboxModal = document.getElementById('lightbox_modal');
     lightboxModal.setAttribute("aria-hidden", 'false');
     const lightbox = createLightbox(mediaFilter, id);
+
     lightbox.displayLightbox();
 }
 function closeLightbox() { //appelée dans le html onclick & dans lightboxFactory.js
@@ -105,12 +114,15 @@ function closeLightbox() { //appelée dans le html onclick & dans lightboxFactor
     lightboxModal.setAttribute("aria-hidden", 'true');
     const lightbox = document.querySelector('.lightbox-item');
     lightbox.innerHTML = "";
-    
+
     contactButton.tabIndex = 0;
-    logo.tabIndex = 0
-    
+    logo.tabIndex = 0;
+
+    //make the page scrollable again
+    document.body.style.overflow = "visible";
+
     let galleryLinks = document.querySelectorAll('.link-media');
-    
+
     galleryLinks.forEach(element => {
         element.tabIndex = 0;
     })
@@ -129,6 +141,7 @@ async function init() {
     const totalLike = await displayTotalLikesByPhotographer(photographerId);
     displayPriceAndLikePhotographer(photographer, totalLike);
     displayMedia(media);
+    document.title = photographer.name;
 }
 
 init()

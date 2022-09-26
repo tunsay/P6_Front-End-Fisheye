@@ -23,7 +23,6 @@ function mediaFactory(data) {
         const infoMedia = document.createElement('div');
         const titleMediaDOM = document.createElement('span');
         const likeMediaDOM = document.createElement('span');
-
         //add classes in the element selectionate
         infoMedia.classList.add('info-media');
         titleMediaDOM.classList.add('name-media');
@@ -31,14 +30,13 @@ function mediaFactory(data) {
         iconHeart.classList.add('fa-solid', 'fa-heart'); //<i></i>
         mediaVideo.classList.add('video-media'); //<video></video>
         linkMedia.classList.add('link-media'); //<a></a>
-
         //add attributes, class and container of each element
         mediaPicture.setAttribute("src", mediaUrl);
         mediaPicture.setAttribute("alt", title);
         mediaVideo.setAttribute("muted", "muted");
         mediaVideo.setAttribute("webkit-playsinline", "true");
         mediaVideo.setAttribute("playsinline", "true");
-        mediaVideo.setAttribute("controls", "true");
+        // mediaVideo.setAttribute("controls", "true");
         mediaVideo.setAttribute("loop", "");
         mediaVideo.setAttribute("tabindex", "-1");
         source.setAttribute("src", mediaUrl);
@@ -46,13 +44,12 @@ function mediaFactory(data) {
         linkMedia.setAttribute("href", mediaUrl);
         linkMedia.setAttribute("aria-label", `open ${title} in a lightbox`);
         linkMedia.setAttribute("tabindex", "0");
-
         //ouvre la lightbox au clic sur lien image
         linkMedia.addEventListener('click', (event) => {
-            event.preventDefault(); // empêche le lien d'ouvrir l'image par défaut
-            openLightbox(id); //(ex. id=365615) affiche l'image correspondant à l'id dans la lightbox
+            event.preventDefault(); // prevent the link to open by default
+            openLightbox(id); //(id of the photo) displays the image corresponding to the id in the lightbox
         })
-        //ouvre la lightbox au clavier avec entrée sur le lien image
+        //open lightbox on keyboard with enter on image link
         linkMedia.addEventListener('keypress', (event) => {
             event.preventDefault();
             if (event.key === "Enter") {
@@ -64,7 +61,7 @@ function mediaFactory(data) {
         let mediaIsLiked = false;
 
         iconHeart.addEventListener('click', () => {
-            if (mediaIsLiked == false) {
+            if (mediaIsLiked == false) { //Check before all if the media is liked or not
                 likeMediaDOM.textContent = likeCount + 1 + " ";
                 iconHeart.classList.add('liked');
                 let totalLikes = document.querySelector('.total-likes');
@@ -77,13 +74,12 @@ function mediaFactory(data) {
                 totalLikes.textContent = parseInt(totalLikes.textContent) - 1 + " ";
                 likeMediaDOM.append(iconHeart);
             }
-            mediaIsLiked = !mediaIsLiked; //passe à true
+            mediaIsLiked = !mediaIsLiked; //switch to true
         });
 
         //display information in Html
         titleMediaDOM.textContent = title;
         likeMediaDOM.textContent = likes + " ";
-
 
         if (data.image) {
             span.appendChild(iconHeart);
