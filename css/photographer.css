@@ -191,9 +191,11 @@ form .contact_button:hover {
     content: "\f078";
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
+    transition: all .2s ease;
 }
 #sort-media-btn.clicked::after{
-    content: "\f077";
+    content: "\f078";
+    transform: rotate(180deg);
 }
 #sort-list{
     position: absolute;
