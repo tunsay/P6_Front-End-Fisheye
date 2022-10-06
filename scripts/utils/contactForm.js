@@ -2,6 +2,7 @@
 const body = document.querySelector('body');
 const header = document.querySelector('header');
 const modal = document.getElementById("contact_modal");
+const sort = document.getElementById("sort-media-btn");
 const form = document.querySelector('form');
 // background elements
 const contactButton = document.querySelector('.contact_button');
@@ -15,6 +16,7 @@ function displayModal() {
     //prevent focus on backgroud elements on tab press
     contactButton.setAttribute("tabindex", "-1");
     logo.setAttribute("tabindex", "-1");
+    sort.setAttribute("tabindex", "-1");
     //Prevent scrolling
     document.body.style.overflow = "hidden";
     
@@ -33,6 +35,7 @@ function closeModal() {
     //makes elements focusable again
     contactButton.tabIndex = 0;
     logo.tabIndex = 0;
+    sort.tabIndex = 0;
     //Make element scrollable again
     document.body.style.overflow = "visible";
     

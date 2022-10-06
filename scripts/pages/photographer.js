@@ -115,6 +115,7 @@ function closeLightbox() { //appelée dans le html onclick & dans lightboxFactor
     const lightbox = document.querySelector('.lightbox-item');
     lightbox.innerHTML = "";
 
+    sort.tabIndex = 0;
     contactButton.tabIndex = 0;
     logo.tabIndex = 0;
 

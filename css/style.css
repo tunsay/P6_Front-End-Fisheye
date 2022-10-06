@@ -1,6 +1,6 @@
 @import url("photographer.css");
 
-:root{
+:root {
     --color-primary: #901C1C;
     --color-secondary: #D3573C;
     --color-tertiary: #DB8876;
@@ -8,7 +8,7 @@
     --border-radius: 5px;
 }
 
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     list-style: none;
@@ -60,26 +60,55 @@ h1 {
 .photographer_section article img {
     height: 200px;
     width: 200px;
-    border-radius: 100% ;
+    border-radius: 100%;
     object-fit: cover;
     transition: all 0.2s ease-out;
 }
 
-.photographer_section:hover > * img,
-a:focus + img{
+.photographer_section:hover>* img,
+a:focus+img {
     opacity: .5;
 }
-.photographer_section:hover > *:hover img,
-a:focus-visible > *:focus-visible img {
+
+.photographer_section:hover>*:hover img,
+a:focus-visible>*:focus-visible img {
     transform: scale(1.1);
     opacity: 1;
 }
 
-.city-and-country{
+.city-and-country {
     color: var(--color-primary);
     font-size: 20px;
 }
 
-.price{
+.price {
     color: #757575;
+}
+
+*:focus {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+/* Smartphone */
+@media screen and (max-width: 800px) {
+    header {
+        flex-direction: column;
+    }
+
+    header h1,
+    header .logo {
+        margin: 0;
+    }
+
+    .photographer_section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .photographer_section:hover>* img,
+    a:focus+img {
+        opacity: 1;
+    }
 }
