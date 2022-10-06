@@ -44,7 +44,8 @@ function mediaFactory(data, type) {
         linkMedia.setAttribute("href", mediaUrl);
         linkMedia.setAttribute("aria-label", `open ${title} in a lightbox`);
         linkMedia.setAttribute("tabindex", "0");
-        //ouvre la lightbox au clic sur lien image
+        
+        //open the lightbox while clicking the link media
         linkMedia.addEventListener('click', (event) => {
             event.preventDefault(); // prevent the link to open by default
             openLightbox(id); //(id of the photo) displays the image corresponding to the id in the lightbox

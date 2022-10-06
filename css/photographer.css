@@ -161,6 +161,7 @@ form .contact_button:hover {
 
 /* ------------------------------ GALLERY SECTION ------------------------------ */
 
+/* Sort */
 .sort{
     display: flex;
     margin: 10px 100px;
@@ -169,6 +170,67 @@ form .contact_button:hover {
 .sort p {
     font-weight: 700;
 }
+
+.wrapper{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+#sort-media-btn {
+    border: none;
+    padding: 0;
+    position: relative;
+    height: auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1rem;
+}
+#sort-media-btn::after{
+    content: "\f078";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+}
+#sort-media-btn.clicked::after{
+    content: "\f077";
+}
+#sort-list{
+    position: absolute;
+    width: 170px;
+    background-color: var(--color-primary);
+    color: white;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-5px);
+    margin-left: 1rem;
+    z-index: 2;
+    box-shadow: 2px 7px 10px var(--color-shadow);
+}
+#sort-list>li{
+    padding: 1rem;
+    font-size: 20px;
+    /* border-top: 1px solid white; */
+    cursor: pointer;
+}
+#sort-list>li::before{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    transform: translateY(-1rem);
+}
+#sort-list>li:hover{
+    background-color: var(--color-secondary);
+}
+.hidden, .focused{
+    display: none;
+}
+
+/* Media Gallery */
 
 .media-gallery{
     display: grid;

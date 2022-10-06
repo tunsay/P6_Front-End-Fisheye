@@ -45,7 +45,6 @@ async function displayMedia(medias) {
     const mediaGallery = document.querySelector(".media-gallery");
     medias.forEach(media => {
         const mediaModel = mediaFactory(media, "Miniature");
-        console.log(media);
         const mediaCardDOM = mediaModel.getMediaCardDOM();
         mediaGallery.appendChild(mediaCardDOM);
     });
@@ -140,7 +139,6 @@ function createLightbox(medias, id) {
         //lightbox structure elements to create
         const mediaTitle = document.createElement('span');
         const lightboxVideo = document.createElement("video");
-        const lightboxImage = document.createElement('img');
         //Add classes
         mediaTitle.className = "name-media";
         lightboxVideo.className = "video-media";
@@ -237,6 +235,7 @@ async function init() {
     displayPhotographer(photographer);
     const totalLike = await displayTotalLikesByPhotographer(photographerId);
     displayPriceAndLikePhotographer(photographer, totalLike);
+    sortMedias(media);
     displayMedia(media);
     document.title = photographer.name;
 }
