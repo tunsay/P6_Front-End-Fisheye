@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 function sortMedias(medias) {
-  sortByLikes();
+  sortByDate();
 
   //sorting list elements
   const sortButton = document.getElementById('sort-media-btn');
