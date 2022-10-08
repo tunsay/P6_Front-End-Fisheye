@@ -44,7 +44,7 @@ function mediaFactory(data, type) {
         linkMedia.setAttribute("href", mediaUrl);
         linkMedia.setAttribute("aria-label", `open ${title} in a lightbox`);
         linkMedia.setAttribute("tabindex", "0");
-        
+
         //open the lightbox while clicking the link media
         linkMedia.addEventListener('click', (event) => {
             event.preventDefault(); // prevent the link to open by default
@@ -61,15 +61,15 @@ function mediaFactory(data, type) {
         let likeCount = likes;
         let mediaIsLiked = false;
 
-        
+        //Click in the icon the like the media
         iconHeart.addEventListener('click', () => {
             if (mediaIsLiked == false) { //Check before all if the media is liked or not
-                likeMediaDOM.textContent = likeCount + 1 + " ";
-                iconHeart.classList.add('liked');
-                let totalLikes = document.querySelector('.total-likes');
-                totalLikes.textContent = parseInt(totalLikes.textContent) + 1 + " ";
-                likeMediaDOM.append(iconHeart);
-            } else {
+                likeMediaDOM.textContent = likeCount + 1 + " "; //Increment the like counter
+                iconHeart.classList.add('liked'); //Set the class "liked" when clicked
+                let totalLikes = document.querySelector('.total-likes'); //Select the totalikes like in the corner right for increment him too
+                totalLikes.textContent = parseInt(totalLikes.textContent) + 1 + " "; // increment the total likes
+                likeMediaDOM.append(iconHeart); //Put the icon
+            } else { //If the media is already liked, bifurque in else
                 likeMediaDOM.textContent = likeCount + " ";
                 iconHeart.classList.remove('liked');
                 let totalLikes = document.querySelector('.total-likes');
@@ -77,6 +77,26 @@ function mediaFactory(data, type) {
                 likeMediaDOM.append(iconHeart);
             }
             mediaIsLiked = !mediaIsLiked; //switch to true
+        });
+
+        // Push the key "L" to like the media
+        linkMedia.addEventListener('keydown', (event) => {
+            if (event.key === "l") {
+                if (mediaIsLiked == false) { 
+                    likeMediaDOM.textContent = likeCount + 1 + " ";
+                    iconHeart.classList.add('liked');
+                    let totalLikes = document.querySelector('.total-likes');
+                    totalLikes.textContent = parseInt(totalLikes.textContent) + 1 + " ";
+                    likeMediaDOM.append(iconHeart);
+                } else {
+                    likeMediaDOM.textContent = likeCount + " ";
+                    iconHeart.classList.remove('liked');
+                    let totalLikes = document.querySelector('.total-likes');
+                    totalLikes.textContent = parseInt(totalLikes.textContent) - 1 + " ";
+                    likeMediaDOM.append(iconHeart);
+                }
+                mediaIsLiked = !mediaIsLiked; 
+            }
         });
 
         //display information in Html
