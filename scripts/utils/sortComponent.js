@@ -14,13 +14,13 @@ function sortMedias(medias) {
 
   //function for display the list of options
   function showSortList() {
-      sortList.classList.toggle('hidden'); 
-      sortButton.classList.toggle('clicked'); // change the direction of arrow
-      if(sortList.classList.contains('hidden')){
-        sortButton.setAttribute('aria-expanded', 'false');
-      } else {
-        sortButton.setAttribute('aria-expanded', 'true');
-      }
+    sortList.classList.toggle('hidden');
+    sortButton.classList.toggle('clicked'); // change the direction of arrow
+    if (sortList.classList.contains('hidden')) {
+      sortButton.setAttribute('aria-expanded', 'false');
+    } else {
+      sortButton.setAttribute('aria-expanded', 'true');
+    }
   }
 
   //function for close the list
@@ -34,9 +34,21 @@ function sortMedias(medias) {
   listWrapper.addEventListener('mouseover', () => {
     showSortList();
   })
+
+  listWrapper.addEventListener('keypress', (event) => {
+    if (event.key === "Enter") {
+      showSortList();
+    }
+  })
   
   listWrapper.addEventListener('mouseout', () => {
     closeSortList();
+  })
+
+  listWrapper.addEventListener('keydown', (event) => {
+    if (event.key === "Escape") {
+      closeSortList();
+    }
   })
 
   // sort by media by clicking
@@ -57,32 +69,32 @@ function sortMedias(medias) {
 
       let sortValue = e.target.innerText; // variable contenant le contenu texte de l'option cliquée
       switch (sortValue) { //défini le tri à appliquer selon le texte contenu
-        case 'Titre' :
+        case 'Titre':
           sortByTitle();
           break;
-        case 'Popularité' :
+        case 'Popularité':
           sortByLikes();
           break;
-        case 'Date' :
+        case 'Date':
           sortByDate();
           break;
-        }
+      }
 
       closeSortList(); // ferme la liste après un clic sur une option
-      
+
       //affiche à nouveau la galerie avec le tri séléctionné appliqué
       medias.forEach((media) => {
-        
+
         const galleryModel = mediaFactory(media, "Miniature");
         const mediaCardDOM = galleryModel.getMediaCardDOM();
         mediaGallery.appendChild(mediaCardDOM);
-      }); 
+      });
     })
   })
 
   //tri des médias au clavier, en appuyant sur entrée sur une option
   sortOption.forEach(option => {
-    option.addEventListener('keyup', (e) => {
+    option.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         mediaGallery.innerHTML = "";
 
@@ -94,26 +106,26 @@ function sortMedias(medias) {
         e.target.classList.add('focused');
         e.target.setAttribute("aria-selected", "true");
         sortButton.innerText = e.target.innerText;
-        sortList.setAttribute("aria-activedescendant", e.target.id); 
+        sortList.setAttribute("aria-activedescendant", e.target.id);
 
         let sortValue = e.target.innerText;
         switch (sortValue) {
-          case 'Titre' :
+          case 'Titre':
             sortByTitle();
             break;
-          case 'Popularité' :
+          case 'Popularité':
             sortByLikes();
             break;
-          case 'Date' :
+          case 'Date':
             sortByDate();
             break;
-          }
+        }
 
         closeSortList();
 
         medias.forEach((media) => {
-          
-          const galleryModel = mediaFactory(media);
+
+          const galleryModel = mediaFactory(media, "Miniature");
           const mediaCardDOM = galleryModel.getMediaCardDOM();
           mediaGallery.appendChild(mediaCardDOM);
         });

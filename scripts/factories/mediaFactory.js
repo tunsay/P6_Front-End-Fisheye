@@ -36,11 +36,11 @@ function mediaFactory(data, type) {
         mediaVideo.setAttribute("muted", "muted");
         mediaVideo.setAttribute("webkit-playsinline", "true");
         mediaVideo.setAttribute("playsinline", "true");
-        // mediaVideo.setAttribute("controls", "true");
         mediaVideo.setAttribute("loop", "");
         mediaVideo.setAttribute("tabindex", "-1");
         source.setAttribute("src", mediaUrl);
         source.setAttribute("type", "video/mp4");
+        iconHeart.setAttribute("aria-label", "like")
         linkMedia.setAttribute("href", mediaUrl);
         linkMedia.setAttribute("aria-label", `open ${title} in a lightbox`);
         linkMedia.setAttribute("tabindex", "0");
@@ -61,6 +61,7 @@ function mediaFactory(data, type) {
         let likeCount = likes;
         let mediaIsLiked = false;
 
+        
         iconHeart.addEventListener('click', () => {
             if (mediaIsLiked == false) { //Check before all if the media is liked or not
                 likeMediaDOM.textContent = likeCount + 1 + " ";
@@ -103,6 +104,8 @@ function mediaFactory(data, type) {
 
         if (type === "Lightbox") {
             if (data.image) {
+                mediaPicture.setAttribute("alt", `a close view of ${title}`);
+                mediaPicture.setAttribute("tabindex", "0");
                 article.append(mediaPicture, titleMediaDOM)
                 return (article);
             } else if (data.video) {

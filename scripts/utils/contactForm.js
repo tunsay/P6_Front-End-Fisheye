@@ -1,4 +1,4 @@
-// éléments du formulaire
+// form element
 const body = document.querySelector('body');
 const header = document.querySelector('header');
 const modal = document.getElementById("contact_modal");
@@ -8,6 +8,7 @@ const form = document.querySelector('form');
 const contactButton = document.querySelector('.contact_button');
 const logo = document.querySelector('.a-logo');
 
+//this function display the modal
 function displayModal() {
     modal.classList.add('modal-open'); // rend la modale visible
     modal.setAttribute("aria-hidden", "false");
@@ -27,6 +28,7 @@ function displayModal() {
     })
 }
 
+//This function close the modal
 function closeModal() {
     modal.classList.remove('modal-open');
     modal.setAttribute("aria-hidden", "true");
@@ -46,9 +48,9 @@ function closeModal() {
     })
 }
 
-// fermeture de la modale au clavier avec échap
+// close the window with echap
 document.addEventListener('keyup', (event) => {
-    //vérifie que la modale est ouverte
+    //check if the modal is open
     if (modal.classList.contains('modal-open')) {
         if (event.key === 'Escape') {
             closeModal();
@@ -56,9 +58,9 @@ document.addEventListener('keyup', (event) => {
     }    
 });
 
-//listener à l'envoi du formulaire
+//listener at the send of the form
 form.addEventListener('submit', (e) => {
-    e.preventDefault(); // prévient l'envoi
+    e.preventDefault(); // prevent the send
 
     //récupère le contenu des inputs
     let firstName = document.getElementById('name').value;
@@ -66,7 +68,7 @@ form.addEventListener('submit', (e) => {
     let email = document.getElementById('email').value;
     let message = document.getElementById('message').value;
 
-    //log les contenus dans la console
+    //log the containers in the console
     console.log("Prénom: " + firstName);
     console.log("Nom: " + lastName);
     console.log("Email: " + email);

@@ -67,6 +67,7 @@ function playVideoHover() {
     });
 }
 
+// Adds up all the likes accumulated by the media. Passing the photographer's id as a parameter will filter all media based on the photographer
 async function displayTotalLikesByPhotographer(id) {
     const fetchPromise = await fetch("./data/photographers.json");
     const mediasJSON = await fetchPromise.json();
@@ -90,6 +91,7 @@ async function displayPriceAndLikePhotographer(photographer, totalLike) {
     const iconHeart = document.createElement('i');
 
     iconHeart.classList.add('fa-solid', 'fa-heart');
+    iconHeart.setAttribute("aria-label", "likes")
     totalLikeSpan.classList.add('total-likes');
 
     totalLikeSpan.textContent = totalLike + " ";
@@ -151,6 +153,7 @@ function createLightbox(medias, id) {
         //Disable the focusable of element
         contactButton.setAttribute("tabindex", "-1");
         logo.setAttribute("tabindex", "-1");
+        sort.setAttribute("tabindex", "-1");
 
         let galleryLinks = document.querySelectorAll('.link-media');
         galleryLinks.forEach(element => {
@@ -234,7 +237,9 @@ async function init() {
     const photographer = await getPhotographer(photographerId);
     const media = await getMedia(photographerId);
     displayPhotographer(photographer);
+    // Get the total likes by this function
     const totalLike = await displayTotalLikesByPhotographer(photographerId);
+    // It will display the price of the photographer and total likes alculte by the function displayTotalLikesByphotographer()
     displayPriceAndLikePhotographer(photographer, totalLike);
     sortMedias(media);
     displayMedia(media);
