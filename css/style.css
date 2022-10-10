@@ -111,39 +111,4 @@ a:focus-visible>*:focus-visible img {
     a:focus+img {
         opacity: 1;
     }
-
-    .media-gallery{
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        margin: 0;
-    }
-
-    .media-gallery img, video{
-        width: 300px;
-        height: 300px;
-    }
-
-    .photographer-header{
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        padding: 0;
-    }
-
-    .photographer-header article{
-        flex-direction: column-reverse;
-        height: inherit;
-
-    }
-
-    .sort{
-        display: flex;
-        align-items: center;
-        margin: 150px 0 0 0;
-    }
-
-    .photographer-header .contact_button{
-        position: inherit;
-    }
 }

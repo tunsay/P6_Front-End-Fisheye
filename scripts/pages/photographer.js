@@ -218,7 +218,6 @@ function createLightbox(medias, id) {
                 event.preventDefault();
             }
         });
-        //management of media according to their type during navigation in the lightbox
         function displayLightboxContainer() {
             //Here put the photo or video with his title
             const mediaModelLightbox = mediaFactory(medias[photoID], "Lightbox");
