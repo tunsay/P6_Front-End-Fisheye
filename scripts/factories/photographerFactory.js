@@ -2,7 +2,7 @@ function photographerFactory(data, type) {
     const { name, id, portrait, city, country, tagline, price } = data;
 
     //Get the profil picture
-    const picture = `assets/photographers/${portrait}`;
+    const picture = `./assets/photographers/${portrait}`;
     //Get link of the photographer select
     const link = `photographer.html?id=${id}`;
 
