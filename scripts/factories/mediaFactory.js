@@ -8,7 +8,7 @@ function mediaFactory(data, type) {
     } else {
         urlMedia = data.image;
     }
-    const mediaUrl = `/assets/medias/${urlMedia}`;
+    const mediaUrl = `./assets/medias/${urlMedia}`;
 
     function getMediaCardDOM() {
 
